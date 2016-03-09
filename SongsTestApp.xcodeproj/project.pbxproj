@@ -13,6 +13,7 @@
 		C270AD4A1C9051B2009F12D0 /* SongsTestApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C270AD481C9051B2009F12D0 /* SongsTestApp.xcdatamodeld */; };
 		C270AD4C1C9051B2009F12D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C270AD4B1C9051B2009F12D0 /* Assets.xcassets */; };
 		C270AD4F1C9051B2009F12D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C270AD4D1C9051B2009F12D0 /* LaunchScreen.storyboard */; };
+		C270AD591C907509009F12D0 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270AD581C907509009F12D0 /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		C270AD4B1C9051B2009F12D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C270AD4E1C9051B2009F12D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C270AD501C9051B2009F12D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C270AD581C907509009F12D0 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				C270AD4D1C9051B2009F12D0 /* LaunchScreen.storyboard */,
 				C270AD501C9051B2009F12D0 /* Info.plist */,
 				C270AD481C9051B2009F12D0 /* SongsTestApp.xcdatamodeld */,
+				C270AD581C907509009F12D0 /* CollectionViewCell.swift */,
 			);
 			path = SongsTestApp;
 			sourceTree = "<group>";
@@ -99,6 +102,7 @@
 				TargetAttributes = {
 					C270AD3D1C9051B2009F12D0 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 724NEB7BZ3;
 					};
 				};
 			};
@@ -140,6 +144,7 @@
 			files = (
 				C270AD4A1C9051B2009F12D0 /* SongsTestApp.xcdatamodeld in Sources */,
 				C270AD441C9051B2009F12D0 /* ViewController.swift in Sources */,
+				C270AD591C907509009F12D0 /* CollectionViewCell.swift in Sources */,
 				C270AD421C9051B2009F12D0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -253,6 +258,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SongsTestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = pfr.SongsTestApp;
@@ -264,6 +270,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SongsTestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = pfr.SongsTestApp;
