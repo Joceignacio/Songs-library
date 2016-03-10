@@ -17,12 +17,34 @@ let context: NSManagedObjectContext = appDel.managedObjectContext
 let request = NSFetchRequest(entityName: "Songs")
 
 
-class ViewController: UIViewController, UICollectionViewDelegate {
+
+class ViewController: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource {
     
     @IBOutlet weak var noSongsLabel: UILabel!
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var refresher : UIRefreshControl!
     
+    func refresh (){
+        
+        print("refreshed")
+        
+        getJSON()
+
+        
+        _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("reloadData"), userInfo: nil, repeats: false)
+        
+        
+        refresher.endRefreshing()
+        
+    }
+    
+    
+    func reloadData(){
+        
+        collectionView.reloadData()
+    }
     
     @IBAction func printDBClick(sender: AnyObject) {
         
@@ -51,10 +73,9 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         
     }
     
-    
+   
     @IBAction func refreshClick(sender: AnyObject) {
-        
-//        collectionView.re
+
         
     }
    
@@ -69,28 +90,27 @@ class ViewController: UIViewController, UICollectionViewDelegate {
                 do {
                     
                     let jsonSongs = try NSJSONSerialization.JSONObjectWithData(urlContent, options: NSJSONReadingOptions.MutableContainers)
+                  
+                    do { let results = try context.executeFetchRequest(request)
+                        
+                        
+                        if results.count > 0 {
+                            
+                            for result in results as! [NSManagedObject]{
+                                print(result.valueForKey("id")! as! Int)
+                                context.deleteObject(result)
+                                
+                            }
+                        }
+                        
+                    }
+                    catch{
+                        
+                        print(error)
+                        
+                    }
                     
                     for (var i=0 ; i < jsonSongs.count ; i++) {
-                        
-                        
-                        do { let results = try context.executeFetchRequest(request)
-                            
-                            
-                            if results.count > 0 {
-                                
-                                for result in results as! [NSManagedObject]{
-                                    
-                                    context.deleteObject(result)
-                                    
-                                }
-                            }
-                            
-                        }
-                        catch{
-                            
-                            print(error)
-                            
-                        }
                         
                         let newSong = NSEntityDescription.insertNewObjectForEntityForName("Songs", inManagedObjectContext: context)
                         
@@ -158,6 +178,9 @@ class ViewController: UIViewController, UICollectionViewDelegate {
             
             cell.authorSong.text = results[indexPath.row].valueForKey("author")! as? String
             
+            
+            
+            
         }
         catch{
             
@@ -174,14 +197,24 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     }
     
     
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        
+        refresher = UIRefreshControl()
+        
+        refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        
+        refresher.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+        
+        self.collectionView?.addSubview(refresher)
+        
         request.returnsObjectsAsFaults = false
         
         getJSON()
+        
+        
         
      
     }
