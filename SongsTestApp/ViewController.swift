@@ -13,6 +13,8 @@ class ViewController: UIViewController, UICollectionViewDelegate , UICollectionV
     
     var dataProvider : DataProvider = DataProvider.instance
 
+    var collectionViewFlowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+    
     @IBOutlet weak var noSongsLabel: UILabel!
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -36,8 +38,9 @@ class ViewController: UIViewController, UICollectionViewDelegate , UICollectionV
 
     @IBAction func refreshClick(sender: AnyObject) {
         
-        //dataProvider.updateDB()
-    }
+        
+        
+        }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         
@@ -57,12 +60,11 @@ class ViewController: UIViewController, UICollectionViewDelegate , UICollectionV
         
         cell.layer.borderWidth = 1
         
+        cell.tag = dataProvider.list[indexPath.row].id
+        
         return cell
         
     }
-        
-    
-    
 
     override func viewDidLoad() {
         
