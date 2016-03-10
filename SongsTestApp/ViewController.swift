@@ -8,18 +8,11 @@
 
 import UIKit
 import CoreData
-//import QuartzCore
-
-let appDel : AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-
-let context: NSManagedObjectContext = appDel.managedObjectContext
-
-let request = NSFetchRequest(entityName: "Songs")
-
-
 
 class ViewController: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource {
     
+    var dataProvider : DataProvider = DataProvider.instance
+
     @IBOutlet weak var noSongsLabel: UILabel!
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -30,141 +23,25 @@ class ViewController: UIViewController, UICollectionViewDelegate , UICollectionV
         
         print("refreshed")
         
-        getJSON()
-
-        
-        _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("reloadData"), userInfo: nil, repeats: false)
-        
+      //  collectionView.reloadData()
         
         refresher.endRefreshing()
-        
-    }
-    
-    
-    func reloadData(){
-        
-        collectionView.reloadData()
     }
     
     @IBAction func printDBClick(sender: AnyObject) {
         
-       
-        do { let results = try context.executeFetchRequest(request)
-            
-            print("results.count = \(results.count)")
-            if results.count > 0 {
-                for result in results as! [NSManagedObject]{
-                    print("author is \(result.valueForKey("author")!)")
-                    print("id is \(result.valueForKey("id")!)")
-                    print("label is \(result.valueForKey("label")!)")
-                    print("-------")
-                    
-                }
-            }
-            
-            
-            
-        }
-        catch{
-            
-            print(error)
-            
-        }
+     dataProvider.printDB()
         
     }
-    
-   
-    @IBAction func refreshClick(sender: AnyObject) {
 
+    @IBAction func refreshClick(sender: AnyObject) {
         
-    }
-   
-    func getJSON(){
-        
-        let url = NSURL(string: "http://tomcat.kilograpp.com/songs/api/songs")
-        
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data, response, error) -> Void in
-            
-            if let urlContent = data {
-                
-                do {
-                    
-                    let jsonSongs = try NSJSONSerialization.JSONObjectWithData(urlContent, options: NSJSONReadingOptions.MutableContainers)
-                  
-                    do { let results = try context.executeFetchRequest(request)
-                        
-                        
-                        if results.count > 0 {
-                            
-                            for result in results as! [NSManagedObject]{
-                                print(result.valueForKey("id")! as! Int)
-                                context.deleteObject(result)
-                                
-                            }
-                        }
-                        
-                    }
-                    catch{
-                        
-                        print(error)
-                        
-                    }
-                    
-                    for (var i=0 ; i < jsonSongs.count ; i++) {
-                        
-                        let newSong = NSEntityDescription.insertNewObjectForEntityForName("Songs", inManagedObjectContext: context)
-                        
-                        newSong.setValue(jsonSongs[i]["author"], forKey: "author")
-                        
-                        newSong.setValue(jsonSongs[i]["id"], forKey: "id")
-                        
-                        newSong.setValue(jsonSongs[i]["label"], forKey: "label")
-                        
-                        do {
-                            try context.save()
-                        }
-                        catch{ print(error)
-                            }
-                        }
-                    
-                }
-                catch {
-                    
-                    print(error)
-                    
-                }
-                
-            }
-        }
-        
-        task.resume()
-        
+        //dataProvider.updateDB()
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         
-        do { let results = try context.executeFetchRequest(request)
-        
-            if results.count>0{
-            
-                noSongsLabel.hidden = true
-                
-                return Int(results.count)
-            }
-            else {
-                
-                noSongsLabel.hidden = false
-                
-                return 0
-            }
-        }
-        catch{
-            
-            print(error)
-            
-            return 0
-        }
-        
+      return  dataProvider.list.count
         
     }
     
@@ -172,22 +49,10 @@ class ViewController: UIViewController, UICollectionViewDelegate , UICollectionV
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
         
-        do { let results = try context.executeFetchRequest(request)
+        cell.labelSong.text = dataProvider.list[indexPath.row].label
             
-            cell.labelSong.text = results[indexPath.row].valueForKey("label")! as? String
-            
-            cell.authorSong.text = results[indexPath.row].valueForKey("author")! as? String
-            
-            
-            
-            
-        }
-        catch{
-            
-            print(error)
-            
-        }
-        
+        cell.authorSong.text =  dataProvider.list[indexPath.row].author
+
         cell.layer.borderColor = UIColor.blackColor().CGColor
         
         cell.layer.borderWidth = 1
@@ -195,12 +60,15 @@ class ViewController: UIViewController, UICollectionViewDelegate , UICollectionV
         return cell
         
     }
+        
     
     
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        JsonHelper.getJSON()
         
         refresher = UIRefreshControl()
         
@@ -210,13 +78,6 @@ class ViewController: UIViewController, UICollectionViewDelegate , UICollectionV
         
         self.collectionView?.addSubview(refresher)
         
-        request.returnsObjectsAsFaults = false
-        
-        getJSON()
-        
-        
-        
-     
     }
    
     override func didReceiveMemoryWarning() {
