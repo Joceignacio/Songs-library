@@ -14,6 +14,9 @@
 		C270AD4C1C9051B2009F12D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C270AD4B1C9051B2009F12D0 /* Assets.xcassets */; };
 		C270AD4F1C9051B2009F12D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C270AD4D1C9051B2009F12D0 /* LaunchScreen.storyboard */; };
 		C270AD591C907509009F12D0 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270AD581C907509009F12D0 /* CollectionViewCell.swift */; };
+		C270AD5D1C916993009F12D0 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270AD5C1C916993009F12D0 /* DataProvider.swift */; };
+		C270AD5F1C9169AB009F12D0 /* Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270AD5E1C9169AB009F12D0 /* Songs.swift */; };
+		C270AD611C91708A009F12D0 /* JsonHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C270AD601C91708A009F12D0 /* JsonHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		C270AD4E1C9051B2009F12D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C270AD501C9051B2009F12D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C270AD581C907509009F12D0 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		C270AD5C1C916993009F12D0 /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		C270AD5E1C9169AB009F12D0 /* Songs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Songs.swift; sourceTree = "<group>"; };
+		C270AD601C91708A009F12D0 /* JsonHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,13 +65,16 @@
 			isa = PBXGroup;
 			children = (
 				C270AD411C9051B2009F12D0 /* AppDelegate.swift */,
-				C270AD431C9051B2009F12D0 /* ViewController.swift */,
 				C270AD451C9051B2009F12D0 /* Main.storyboard */,
 				C270AD4B1C9051B2009F12D0 /* Assets.xcassets */,
 				C270AD4D1C9051B2009F12D0 /* LaunchScreen.storyboard */,
 				C270AD501C9051B2009F12D0 /* Info.plist */,
 				C270AD481C9051B2009F12D0 /* SongsTestApp.xcdatamodeld */,
+				C270AD431C9051B2009F12D0 /* ViewController.swift */,
 				C270AD581C907509009F12D0 /* CollectionViewCell.swift */,
+				C270AD5C1C916993009F12D0 /* DataProvider.swift */,
+				C270AD601C91708A009F12D0 /* JsonHelper.swift */,
+				C270AD5E1C9169AB009F12D0 /* Songs.swift */,
 			);
 			path = SongsTestApp;
 			sourceTree = "<group>";
@@ -142,8 +151,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C270AD5F1C9169AB009F12D0 /* Songs.swift in Sources */,
 				C270AD4A1C9051B2009F12D0 /* SongsTestApp.xcdatamodeld in Sources */,
 				C270AD441C9051B2009F12D0 /* ViewController.swift in Sources */,
+				C270AD611C91708A009F12D0 /* JsonHelper.swift in Sources */,
+				C270AD5D1C916993009F12D0 /* DataProvider.swift in Sources */,
 				C270AD591C907509009F12D0 /* CollectionViewCell.swift in Sources */,
 				C270AD421C9051B2009F12D0 /* AppDelegate.swift in Sources */,
 			);
@@ -297,6 +309,7 @@
 				C270AD551C9051B2009F12D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
