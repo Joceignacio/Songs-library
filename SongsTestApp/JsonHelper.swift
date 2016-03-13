@@ -11,7 +11,8 @@ import CoreData
 import UIKit
 
 class JsonHelper {
-
+    
+    //get JSON from server and depending of property "emptyBase" creating or updating data list 
     internal static func getJSON( emptyBase : Bool ) -> Void {
         
         var newList :[songs] = []

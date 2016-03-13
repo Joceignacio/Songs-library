@@ -23,6 +23,8 @@ class DataProvider{
     
     var list : [songs]
     
+    
+    //create a private constructor
     private init(){
         
         request.returnsObjectsAsFaults = false
@@ -44,6 +46,7 @@ class DataProvider{
             }
              
             else {
+                
                 JsonHelper.getJSON(true)
             
             }
@@ -84,6 +87,7 @@ class DataProvider{
         
     }
     
+    // updating indexToDel and listToAdd
     internal func  updateDB(newlist : [songs]) -> Void{
        
         listToAdd = []
